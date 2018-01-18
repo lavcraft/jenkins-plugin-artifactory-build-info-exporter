@@ -2,9 +2,9 @@
 
 ## Build
 
-  ./gradlew build
+    ./gradlew build
 
 ## Binaries
 
-Plugin hpi file must be located in build/libs directory. Grab it and use
+Plugin hpi file must be located in `build/libs` directory. Grab it and use
 
