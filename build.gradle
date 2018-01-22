@@ -73,6 +73,7 @@ dependencies {
   testCompileOnly 'org.projectlombok:lombok:1.16.12'
   jenkinsTest 'org.jenkins-ci.main:jenkins-test-harness:2.32'
   testCompile 'junit:junit-dep:4.11'
+  compile 'org.codehaus.groovy:groovy-all:2.4.8'
 }
 
 defaultTasks 'test', 'jpi'

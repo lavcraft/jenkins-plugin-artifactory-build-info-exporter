@@ -18,6 +18,7 @@ import org.jvnet.hudson.test.JenkinsRule;
 import org.jvnet.hudson.test.TestExtension;
 import org.xml.sax.SAXException;
 import ru.alfalab.jenkinsci.plugins.ArtifactInfoData;
+import ru.alfalab.jenkinsci.plugins.BakedArtifact;
 
 import java.io.IOException;
 import java.util.List;
@@ -63,15 +64,19 @@ public class AddArtifactInfoStepTest {
             .anyMatch(action -> action.className.equals("ru.alfalab.jenkinsci.plugins.ArtifactInfoData"))
     );
 
-    assertThat(
-        buildResponse.actions.stream()
-            .filter(action -> action.className.equals("ru.alfalab.jenkinsci.plugins.ArtifactInfoData"))
-            .findAny()
-            .orElse(STUB_EXTERNAL_ACTION)
-            .getArtifactInfoData()
-            .getArtifactsByType().get("jar")
-            .get(0).getName(),
+    BakedArtifact jarArtifact = buildResponse.actions.stream()
+        .filter(action -> action.className.equals("ru.alfalab.jenkinsci.plugins.ArtifactInfoData"))
+        .findAny()
+        .orElse(STUB_EXTERNAL_ACTION)
+        .getArtifactInfoData()
+        .getArtifactsByType().get("jar").get(0);
+
+    assertThat(jarArtifact.getName(),
         equalTo("my-app-name")
+    );
+
+    assertThat(jarArtifact.getType(),
+        equalTo("jar")
     );
   }
 
